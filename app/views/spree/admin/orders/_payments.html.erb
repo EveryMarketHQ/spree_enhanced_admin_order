@@ -1,0 +1,29 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <h3 class="card-title mb-0 h5"><%= Spree.t(:payments) %></h3>
+  </div>
+  <div class="table-responsive">
+    <% if @order.outstanding_balance? %>
+      <div class="alert alert-info outstanding-balance">
+        <%= @order.outstanding_balance < 0 ? Spree.t(:credit_owed) : Spree.t(:balance_due) %>:
+        <strong><%= @order.display_outstanding_balance %></strong>
+      </div>
+    <% end %>
+
+    <% if payments.any? %>
+      <div data-hook="payment_list" class="mb-3 table-responsive">
+        <%= render partial: 'spree/admin/payments/list', locals: {payments: payments} %>
+      </div>
+
+      <% if refunds.any? %>
+        <fieldset data-hook="payment_list" class="no-border-bottom">
+          <legend><%= Spree.t(:refunds) %></legend>
+          <%= render partial: 'spree/admin/shared/refunds', locals: {refunds: refunds, show_actions: true} %>
+        </fieldset>
+      <% end %>
+
+    <% else %>
+      <div class="alert alert-info no-objects-found"><%= Spree.t(:order_has_no_payments) %></div>
+    <% end %>
+  </div>
+</div>

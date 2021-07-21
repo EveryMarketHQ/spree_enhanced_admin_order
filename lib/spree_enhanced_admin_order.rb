@@ -1,0 +1,6 @@
+require 'spree_core'
+require 'spree_extension'
+require 'spree_enhanced_admin_order/engine'
+require 'spree_enhanced_admin_order/version'
+require 'shipping/carrier'
+require 'shipping/carriers'

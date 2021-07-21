@@ -1,0 +1,15 @@
+<% if order.line_items.exists? %>
+  <table class="table table-bordered line-items">
+    <tbody>
+    <% order.line_items.each do |item| %>
+      <tr class="line-item" id="line-item-<%= item.id %>">
+        <td class="line-item-image image text-center"><%= link_to mini_image(item.variant), edit_admin_product_path(item.variant.product) %></td>
+        <td class="line-item-name">
+          <%= link_to item.name, edit_admin_product_path(item.variant.product) %>
+          <br><%= "(#{item.options_text})" if item.options_text.present? %>
+        </td>
+        <td class="line-item-price text-center"><%= item.quantity %> x <%= item.single_money.to_html %></td>
+      </tr>
+    <% end %></tbody>
+  </table>
+<% end %>

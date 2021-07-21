@@ -1,0 +1,50 @@
+<%= render 'order_actions', order: @order, events: @order_events %>
+
+<%= render 'spree/admin/orders/order_sidebar', current: :shipments %>
+
+<% content_for :page_title do %>
+  <% unless @order.complete? %>
+    <span class="state badge badge-<%= @order.state %> text-uppercase">
+      <%= Spree.t(@order.state, scope: :order_state) %>
+    </span>
+  <% end %>
+  <% unless @order.canceled? %>
+    <% if @order.payment_state_readable.present? %>
+      <span class="state badge badge-<%= @order.payment_state_readable %> text-uppercase">
+        <%= Spree.t(@order.payment_state_readable, scope: :shipment_states_new) %>
+      </span>
+    <% end %>
+    <span class="state badge badge-<%= @order.shipment_state %> text-uppercase">
+      <%= Spree.t(@order.shipment_state, scope: :shipment_states_new) %>
+    </span>
+  <% end %>
+<% end %>
+<div class="">
+  <%= pretty_time(@order.completed_at) %>
+</div>
+<br>
+<div data-hook="admin_order_edit_header">
+  <%= render 'spree/admin/shared/error_messages', target: @order %>
+</div>
+
+<% if @order.payments.valid.any? && @order.considered_risky? %>
+  <%= render 'spree/admin/orders/risk_analysis', latest_payment: @order.payments.valid.last %>
+<% end %>
+
+
+<% if @order.line_items.empty? %>
+  <div class="alert alert-warning">
+    <%= Spree.t(:your_order_is_empty_add_product) %>
+  </div>
+<% end %>
+
+<div data-hook="admin_order_edit_form">
+  <div id="order-form-wrapper">
+    <%= render partial: 'form', locals: {order: @order} %>
+  </div>
+</div>
+
+<%= render 'spree/admin/orders/payment_summary' %>
+
+<%= render partial: 'payments', locals: {order: @order, payments: @order.payments, refunds: @order.refunds} %>
+<%= render partial: 'state_changes', locals: {order: @order, state_changes: @order.state_changes} %>

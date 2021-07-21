@@ -1,0 +1,19 @@
+h1 .badge, h2 .badge, h3 .badge, h5 .badge {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.badge-refunded,.badge-canceled,.badge-void {
+    color: #fff;
+    background-color: #F55753;
+}
+
+a.badge-refunded:hover, a.badge-refunded:focus,
+a.badge-canceled:hover, a.badge-canceled:focus
+a.badge-void:hover, a.badge-void:focus{
+    color: #fff;
+    background-color: #f22823;
+}
+.card-title,.card-header{
+    text-transform: capitalize;
+}
