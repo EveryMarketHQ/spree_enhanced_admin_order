@@ -1,5 +1,5 @@
 module Spree
-  module BaseHelper
+  module CarrierTrackingHelper
     def link_to_carrier_tracking(shipment, options = {})
       return unless shipment.tracking && shipment.shipping_method
 
