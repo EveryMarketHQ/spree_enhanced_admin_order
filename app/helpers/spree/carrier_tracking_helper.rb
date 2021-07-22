@@ -5,7 +5,7 @@ module Spree
 
       options[:target] ||= :blank
 
-      tracking_text = if shipment.carrier.blank?
+      tracking_text = if shipment.carrier.nil? || shipment.carrier.blank?
                         shipment.tracking
                       else
                         shipment.carrier + " " + shipment.tracking
