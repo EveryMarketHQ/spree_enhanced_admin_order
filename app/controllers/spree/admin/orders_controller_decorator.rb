@@ -1,7 +1,10 @@
 module Spree
   module Admin
     module OrdersControllerDecorator
-
+      def self.prepended(base)
+        base.helper Spree::CarrierTrackingHelper
+      end
+      
       def edit
         redirect_to admin_order_url(@order)
       end
