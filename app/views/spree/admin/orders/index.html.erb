@@ -219,11 +219,9 @@
           </td>
           <td class="no-wrap">
             <% if order.payment_state %>
-
               <%= link_to Spree.t("payment_states.#{order.payment_state}"),
                           admin_order_payments_path(order),
                           class: "badge badge-#{order.payment_state}" %>
-
               <span class="filterable js-add-filter"
                     data-ransack-field="q_payment_state_eq"
                     data-ransack-value="<%= order.payment_state %>">
@@ -255,9 +253,8 @@
           </td>
           <td><%= order.display_total.to_html %></td>
           <td>
-            <a href="" class="with-popover"  data-placement="auto" data-trigger='focus' data-content=' <%= render "spree/admin/orders/line_items_preview", order: order %>'>
+            <a href="#" class="with-popover"  data-placement="auto" data-trigger='focus' data-content='<%= render "spree/admin/orders/line_items_preview", order: order %>'>
               <%= order.quantity %> <%= order.quantity > 1 ? 'items' : 'item' %>
-
             </a>
           </td>
           <td class='actions actions-1' data-hook="admin_orders_index_row_actions">
