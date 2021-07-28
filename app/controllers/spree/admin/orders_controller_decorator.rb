@@ -5,6 +5,17 @@ module Spree
         base.helper SpreeEnhancedAdminOrder::Spree::CarrierTrackingHelper
       end
 
+      def cancel
+        begin
+          @order.canceled_by(try_spree_current_user)
+          flash[:success] = Spree.t(:order_canceled)
+        rescue => ex
+          flash[:error] = ex.message
+        end
+
+        redirect_back fallback_location: spree.edit_admin_order_url(@order)
+      end
+
       def edit
         redirect_to admin_order_url(@order)
       end

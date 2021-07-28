@@ -56,9 +56,13 @@ document.addEventListener('DOMContentLoaded', function () {
             html: true,
             sanitize: false,
         })
+
+        $(this).click(function () {
+            return false;
+        })
     })
 
-    $('.with-popover').on('show.bs.popover', function(event) {
+    $('.with-popover').on('show.bs.popover', function (event) {
         if (('ontouchstart' in window)) {
             event.preventDefault()
         }
